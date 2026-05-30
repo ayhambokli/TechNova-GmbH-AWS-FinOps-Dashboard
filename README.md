@@ -1,7 +1,7 @@
 # ☁️ TechNova GmbH — AWS FinOps Analysis
 
 [![View Notebook](https://img.shields.io/badge/View%20Notebook-nbviewer-orange?logo=jupyter)](https://nbviewer.org/github/ayhambokli/TechNova-GmbH-AWS-FinOps-Dashboard/blob/main/Finops_Data_Analysis.ipynb)
-[![Open Dashboard](https://img.shields.io/badge/Open%20Dashboard-Streamlit-FF4B4B?logo=streamlit)](https://YOUR-APP-URL.streamlit.app)
+[![Open Dashboard]([https://img.shields.io/badge/Open%20Dashboard-Streamlit-FF4B4B?logo=streamlit)](https://YOUR-APP-URL.streamlit.app](https://technova-gmbh-aws-finops-dashboard-3myizjhrgzsv5hxjoqqjle.streamlit.app/))
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![Pandas](https://img.shields.io/badge/Pandas-2.x-green)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.x-red)
