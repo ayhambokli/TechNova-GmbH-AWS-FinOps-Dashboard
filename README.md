@@ -37,7 +37,6 @@ This project identifies the root causes and quantifies **€7,737 in savings opp
 
 ### Monthly Cost Trend
 
-![Monthly Cost](charts/chart1_monthly_cost.png)
 
 AWS spend jumped **+69%** from January (€5,744) to February (€9,682) and remained elevated in March (€8,718).
 Total 3-month spend: **€24,145**.
@@ -46,7 +45,6 @@ Total 3-month spend: **€24,145**.
 
 ### Cost by Service
 
-![Cost by Service](charts/chart2_cost_by_service.png)
 
 **EC2 and S3** are the two biggest cost drivers, accounting for **70% of total spend**.
 Both spiked in February and showed different patterns — EC2 partially recovered while S3 kept growing.
@@ -55,7 +53,6 @@ Both spiked in February and showed different patterns — EC2 partially recovere
 
 ### Cost by Team
 
-![Cost by Team](charts/chart3_cost_by_team.png)
 
 **31% of spend (€7,542) has no team owner** — labeled `untagged`.
 The untagged spike in February (€4,753) was the primary driver of the cost increase.
@@ -65,7 +62,6 @@ Finance cannot do chargeback on untagged resources.
 
 ### Savings Opportunities
 
-![Savings Summary](charts/chart4_savings.png)
 
 | # | Finding | Saving | Action |
 |---|---------|--------|--------|
