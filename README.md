@@ -1,5 +1,9 @@
 # ☁️ TechNova GmbH — AWS FinOps Analysis
-https://nbviewer.org/github/ayhambokli/TechNova-GmbH-AWS-FinOps-Dashboard/blob/main/Finops_Data_Analysis.ipynb
+
+[![View Notebook](https://img.shields.io/badge/View%20Notebook-nbviewer-orange?logo=jupyter)](https://nbviewer.org/github/ayhambokli/TechNova-GmbH-AWS-FinOps-Dashboard/blob/main/Finops_Data_Analysis.ipynb)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Pandas](https://img.shields.io/badge/Pandas-2.x-green)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.x-red)
 
 > **Simulated Cortex Reply FinOps Engagement** | Python · Pandas · Matplotlib · Streamlit
 
@@ -24,52 +28,32 @@ This project identifies the root causes and quantifies **€7,737 in savings opp
 > *"Our AWS bill jumped from €42,000/month to €71,000/month over the last 3 months and nobody on our side can explain why."*
 > — Marcus Weber, CTO TechNova GmbH
 
-### The Objective
-
-1. Clean and merge 3 raw AWS datasets
-2. Identify top cost drivers by service and team
-3. Find waste — untagged spend, idle resources, uncontrolled storage
-4. Quantify savings potential in EUR
-5. Deliver a Streamlit dashboard and recommendations report
-
 ---
 
 ## 📊 Key Findings
 
-### Monthly Cost Trend
+### 1. Monthly Cost Trend — 69% spike in February
+![Monthly Cost](charts/chart1_monthly_cost.png)
 
+### 2. Cost by Service — EC2 and S3 drive 70% of spend
+![Cost by Service](charts/chart2_cost_by_service.png)
 
-AWS spend jumped **+69%** from January (€5,744) to February (€9,682) and remained elevated in March (€8,718).
-Total 3-month spend: **€24,145**.
+### 3. Cost by Team — 31% untagged with no owner
+![Cost by Team](charts/chart3_cost_by_team.png)
 
----
-
-### Cost by Service
-
-
-**EC2 and S3** are the two biggest cost drivers, accounting for **70% of total spend**.
-Both spiked in February and showed different patterns — EC2 partially recovered while S3 kept growing.
+### 4. Savings Opportunities — €7,737 identified
+![Savings Summary](charts/chart4_savings.png)
 
 ---
 
-### Cost by Team
-
-
-**31% of spend (€7,542) has no team owner** — labeled `untagged`.
-The untagged spike in February (€4,753) was the primary driver of the cost increase.
-Finance cannot do chargeback on untagged resources.
-
----
-
-### Savings Opportunities
-
+## 💡 Savings Summary
 
 | # | Finding | Saving | Action |
 |---|---------|--------|--------|
-| 1 | 31% of spend untagged — no owner | €7,542 | Enforce tagging policy via AWS Config Rules |
-| 2 | S3 raw-logs bucket growing 77% | €3,956 | Add S3 lifecycle policy (Glacier after 30 days) |
-| 3 | 4 EC2 instances idle on weekends (<10% CPU) | €1,958/yr | AWS Instance Scheduler — auto-shutdown |
-| 4 | 100% On-Demand, zero Reserved Instances | €1,822 | Purchase 1-year RIs for EC2 + RDS |
+| 1 | 31% of spend untagged — no owner | €7,542 | Enforce tagging via AWS Config Rules |
+| 2 | S3 raw-logs bucket growing 77% | €3,956 | Add S3 lifecycle policy |
+| 3 | 4 EC2 instances idle on weekends | €1,958/yr | AWS Instance Scheduler |
+| 4 | 100% On-Demand, zero Reserved Instances | €1,822 | Purchase 1-year RIs |
 | | **Total** | **€7,737** | **32% cost reduction** |
 
 ---
@@ -79,20 +63,19 @@ Finance cannot do chargeback on untagged resources.
 ```
 finops-project/
 │
-├── aws_billing.csv            # AWS Cost & Usage data (126 rows)
-├── ec2_usage_metrics.csv      # EC2 CPU & memory utilization (54 rows)
-├── resource_inventory.csv     # Resource metadata — owner, team, cost center (42 rows)
+├── aws_billing.csv              # AWS Cost & Usage data (126 rows)
+├── ec2_usage_metrics.csv        # EC2 CPU & memory utilization (54 rows)
+├── resource_inventory.csv       # Resource metadata — owner, team, cost center (42 rows)
 │
-├── Finops_Data_Analysis.ipynb # Full analysis notebook
-├── dashboard.py               # Streamlit dashboard
+├── Finops_Data_Analysis.ipynb   # Full analysis notebook
+├── dashboard.py                 # Streamlit dashboard
+├── README.md
 │
-├── charts/                    # Exported chart images
-│   ├── chart1_monthly_cost.png
-│   ├── chart2_cost_by_service.png
-│   ├── chart3_cost_by_team.png
-│   └── chart4_savings.png
-│
-└── README.md
+└── charts/
+    ├── chart1_monthly_cost.png
+    ├── chart2_cost_by_service.png
+    ├── chart3_cost_by_team.png
+    └── chart4_savings.png
 ```
 
 ---
@@ -101,8 +84,8 @@ finops-project/
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/yourusername/finops-technova.git
-cd finops-technova
+git clone https://github.com/ayhambokli/TechNova-GmbH-AWS-FinOps-Dashboard.git
+cd TechNova-GmbH-AWS-FinOps-Dashboard
 ```
 
 ### 2. Install dependencies
@@ -120,18 +103,6 @@ jupyter notebook Finops_Data_Analysis.ipynb
 streamlit run dashboard.py
 ```
 
-Dashboard opens at `http://localhost:8501`
-
----
-
-## 📁 Datasets
-
-| File | Description | Rows | Columns |
-|------|-------------|------|---------|
-| `aws_billing.csv` | AWS Cost & Usage Report — service, cost, tags, region, pricing term | 126 | 16 |
-| `ec2_usage_metrics.csv` | CPU & memory utilization per EC2 instance per month | 54 | 10 |
-| `resource_inventory.csv` | Master resource list — owner email, team, cost center, environment | 42 | 10 |
-
 ---
 
 ## 🔍 Analysis Steps
@@ -142,7 +113,7 @@ Dashboard opens at `http://localhost:8501`
 | 2. Clean | Fix date types, normalize environment values, fill missing tags, convert USD → EUR |
 | 3. Merge | LEFT JOIN billing ← inventory ← usage metrics into one enriched dataframe |
 | 4. Analyse | 9 analyses covering cost trends, team allocation, idle resources, RI gap, S3 growth |
-| 5. Visualize | 9 matplotlib charts — one per analysis |
+| 5. Visualize | Matplotlib charts — one per analysis |
 | 6. Dashboard | Streamlit app with 5 tabs — Overview, Teams, EC2, S3, Savings |
 | 7. Report | Findings, conclusions, and FinOps recommendations |
 
@@ -160,13 +131,4 @@ Dashboard opens at `http://localhost:8501`
 
 ---
 
-## 🛠️ Tech Stack
-
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![Pandas](https://img.shields.io/badge/Pandas-2.x-green)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-3.x-orange)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.x-red)
-
----
-
-*This project was built as part of interview preparation for a FinOps Data Analyst & Consultant role at Cortex Reply.*
+*Built as part of interview preparation for a FinOps Data Analyst & Consultant role at Cortex Reply.*
