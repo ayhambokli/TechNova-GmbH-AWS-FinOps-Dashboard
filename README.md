@@ -1,5 +1,5 @@
 # ☁️ TechNova GmbH — AWS FinOps Analysis
-[![View Notebook](https://img.shields.io/badge/View%20Notebook-nbviewer-orange?logo=jupyter)](https://nbviewer.org/github/ayhambokli/TechNova-GmbH-AWS-FinOps-Dashboard/blob/main/Finops%20Data%20analsys.ipynb)
+https://nbviewer.org/github/ayhambokli/TechNova-GmbH-AWS-FinOps-Dashboard/blob/main/Finops_Data_Analysis.ipynb
 
 > **Simulated Cortex Reply FinOps Engagement** | Python · Pandas · Matplotlib · Streamlit
 
